@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Joc Avansat – Teo'School</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo">
+                    <h2>Teo'School</h2>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Acasă</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle active">Jocuri Video</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="joc-video.html">Ce este un joc video?</a></li>
+                            <li><a href="limbaje-programare.html">Limbaje de Programare</a></li>
+                            <li><a href="motoare-jocuri.html">Motoare de Jocuri</a></li>
+                            <li><a href="dezvoltare-jocuri.html">Dezvoltarea Jocurilor</a></li>
+                            <li><a href="industria-gaming.html">Industria Gaming</a></li>
+                            <li><a href="glosar.html">Glosar de termeni</a></li>
+                            <li><a href="joc-avansat.html" class="active">Mini joc (avansat)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../index.html#despre-creator">Despre</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="surse.html">Surse</a></li>
+                </ul>
+                <div class="settings">
+                    <button class="settings-btn" aria-haspopup="true" aria-expanded="false" aria-controls="settings-menu" title="Setări">⚙️</button>
+                    <div id="settings-menu" class="settings-menu" role="menu" aria-label="Setări temă">
+                        <button class="settings-item" data-theme="light" role="menuitem">Mod Luminos</button>
+                        <button class="settings-item" data-theme="dark" role="menuitem">Mod Întunecat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <div class="container">
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1>Mini joc – platformer</h1>
+                    <p class="hero-description">Controlează personajul, sari pe platforme, colectează stele și adună puncte. Folosește tastele A/D sau săgeți stânga/dreapta pentru mișcare și Space pentru săritură.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="content-card">
+                    <h2>Joc</h2>
+                    <div class="game-container">
+                        <canvas id="game" width="960" height="540" aria-label="Mini joc platformer"></canvas>
+                        <div class="hud">
+                            <span id="score">Scor: 0</span>
+                            <span id="hint">A/D sau ◀ ▶ pentru mișcare • Space pentru săritură</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Teo'School</h3>
+                    <p>Învățăm despre jocurile video și programare într-un mod distractiv și interactiv.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Link-uri Rapide</h3>
+                    <ul>
+                        <li><a href="../index.html">Acasă</a></li>
+                        <li><a href="joc-video.html">Jocuri Video</a></li>
+                        <li><a href="joc-avansat.html" class="active">Mini joc</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Teo'School. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var root = document.documentElement;
+            var savedTheme = localStorage.getItem('theme');
+            if (!savedTheme) {
+                try {
+                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    savedTheme = prefersDark ? 'dark' : 'light';
+                } catch (e) { savedTheme = 'dark'; }
+            }
+            root.setAttribute('data-theme', savedTheme);
+
+            var btn = document.querySelector('.settings-btn');
+            var menu = document.getElementById('settings-menu');
+            if (btn && menu) {
+                var toggleMenu = function(open) {
+                    if (typeof open === 'boolean') {
+                        menu.classList.toggle('open', open);
+                        btn.setAttribute('aria-expanded', String(open));
+                    } else {
+                        var willOpen = !menu.classList.contains('open');
+                        menu.classList.toggle('open', willOpen);
+                        btn.setAttribute('aria-expanded', String(willOpen));
+                    }
+                };
+                btn.addEventListener('click', function(e) { e.stopPropagation(); toggleMenu(); });
+                menu.addEventListener('click', function(e) {
+                    var target = e.target;
+                    if (target && target.matches('.settings-item')) {
+                        var theme = target.getAttribute('data-theme');
+                        if (theme) { root.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); }
+                        toggleMenu(false);
+                    }
+                });
+                document.addEventListener('click', function() { toggleMenu(false); });
+                document.addEventListener('keydown', function(e) { if (e.key === 'Escape') toggleMenu(false); });
+            }
+        })();
+    </script>
+
+    <button id="backToTop" class="back-to-top" aria-label="Înapoi sus" title="Înapoi sus">↑</button>
+    <script>
+      (function(){
+        var btn = document.getElementById('backToTop');
+        var showAfter = 300;
+        function onScroll(){
+          if (window.scrollY > showAfter) btn.classList.add('show'); else btn.classList.remove('show');
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        onScroll();
+      })();
+    </script>
+
+    <script>
+    (function() {
+        var canvas = document.getElementById('game');
+        var ctx = canvas.getContext('2d');
+        var W = canvas.width, H = canvas.height;
+
+        var gravity = 0.6;
+        var friction = 0.85;
+        var moveAcceleration = 0.7;
+        var maxSpeedX = 6.0;
+        var jumpVelocity = -16.0;
+
+        var cameraX = 0; // world offset
+
+        var keys = { left: false, right: false, up: false };
+        var coyoteFrames = 0;
+        var COYOTE_MAX = 8; // ~130ms at 60fps
+
+        var player = {
+            x: 100, y: 0, w: 36, h: 48,
+            vx: 0, vy: 0,
+            onGround: false,
+            frame: 0, frameTick: 0
+        };
+
+        function createPlatforms() {
+            var plats = [];
+            var x = 0;
+            plats.push({ x: -200, y: H-40, w: 2000, h: 20 }); // ground strip
+            for (var i = 0; i < 24; i++) {
+                var pw = 180 + Math.random()*120;
+                var gap = 100 + Math.random()*140;
+                x += gap;
+                // all platforms much lower
+                var lowering = i * 6; // gentle step-down
+                var py = (H - 240) + lowering + Math.sin(i*0.5)*16 + (Math.random()*16 - 8);
+                // clamp range near bottom, well above ground strip
+                if (py > H - 80) py = H - 80;     // don't get too close to ground
+                if (py < H - 300) py = H - 300;   // keep them all low
+                plats.push({ x: x, y: py, w: pw, h: 14 });
+            }
+            return plats;
+        }
+
+        var platforms = createPlatforms();
+
+        function createCoins() {
+            var list = [];
+            for (var i = 0; i < platforms.length; i++) {
+                var p = platforms[i];
+                if (p.y < H-50 && p.w > 140 && Math.random() > 0.35) {
+                    var count = 2 + Math.floor(Math.random()*2);
+                    for (var c = 0; c < count; c++) {
+                        list.push({ x: p.x + 40 + c*48, y: p.y - 34, r: 10, taken: false });
+                    }
+                }
+            }
+            return list;
+        }
+
+        var coins = createCoins();
+        var score = 0;
+        var scoreEl = document.getElementById('score');
+
+        function drawParallax() {
+            var layers = [
+                { speed: 0.2, color: 'rgba(255,255,255,0.06)', height: 140 },
+                { speed: 0.5, color: 'rgba(255,255,255,0.09)', height: 220 },
+                { speed: 1.0, color: 'rgba(255,255,255,0.12)', height: 320 }
+            ];
+            for (var i = 0; i < layers.length; i++) {
+                var L = layers[i];
+                var offset = (cameraX * L.speed) % W;
+                ctx.fillStyle = L.color;
+                for (var x = -offset - W; x < W*2; x += 160) {
+                    ctx.fillRect(x, H - L.height, 120, 4);
+                    ctx.fillRect(x+40, H - L.height + 28, 80, 3);
+                    ctx.fillRect(x+90, H - L.height + 56, 100, 3);
+                }
+            }
+        }
+
+        function drawPlayer() {
+            // Fake sprite animation with stripes
+            var frameColors = ['#ffd166', '#ef476f', '#06d6a0', '#118ab2'];
+            player.frameTick = (player.frameTick + (Math.abs(player.vx) > 0.2 ? 1 : 0)) % 8;
+            if (player.frameTick === 0) player.frame = (player.frame + 1) % frameColors.length;
+
+            var px = Math.floor(player.x - cameraX);
+            var py = Math.floor(player.y);
+
+            // body
+            ctx.fillStyle = frameColors[player.frame];
+            ctx.fillRect(px, py, player.w, player.h);
+            // head
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(px+8, py-12, 20, 12);
+            // eye
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(px+14, py-8, 6, 4);
+        }
+
+        function drawPlatforms() {
+            ctx.fillStyle = 'rgba(255,255,255,0.15)';
+            for (var i = 0; i < platforms.length; i++) {
+                var p = platforms[i];
+                var px = p.x - cameraX;
+                if (px + p.w < -50 || px > W + 50) continue;
+                ctx.fillRect(Math.floor(px), Math.floor(p.y), p.w, p.h);
+            }
+        }
+
+        function drawCoins() {
+            for (var i = 0; i < coins.length; i++) {
+                var c = coins[i];
+                if (c.taken) continue;
+                var cx = c.x - cameraX;
+                if (cx < -30 || cx > W + 30) continue;
+                ctx.save();
+                ctx.translate(cx, c.y);
+                ctx.rotate((Date.now()/400) % (Math.PI*2));
+                ctx.fillStyle = '#ffd700';
+                ctx.beginPath();
+                ctx.moveTo(0, -c.r);
+                for (var k=1;k<10;k++){
+                    var angle = k * (Math.PI * 2) / 10;
+                    var radius = k % 2 === 0 ? c.r : c.r/2;
+                    ctx.lineTo(Math.cos(angle)*radius, Math.sin(angle)*radius);
+                }
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function aabb(ax, ay, aw, ah, bx, by, bw, bh) {
+            return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
+        }
+
+        function update() {
+            // input
+            if (keys.left) player.vx -= moveAcceleration;
+            if (keys.right) player.vx += moveAcceleration;
+            player.vx *= player.onGround ? friction : 0.98;
+            if (player.vx > maxSpeedX) player.vx = maxSpeedX;
+            if (player.vx < -maxSpeedX) player.vx = -maxSpeedX;
+
+            // gravity
+            player.vy += gravity;
+
+            // horizontal move
+            player.x += player.vx;
+            // collisions X
+            for (var i = 0; i < platforms.length; i++) {
+                var p = platforms[i];
+                if (aabb(player.x, player.y, player.w, player.h, p.x, p.y, p.w, p.h)) {
+                    if (player.vx > 0) player.x = p.x - player.w;
+                    else if (player.vx < 0) player.x = p.x + p.w;
+                    player.vx = 0;
+                }
+            }
+
+            // vertical move
+            player.y += player.vy;
+            player.onGround = false;
+            for (var j = 0; j < platforms.length; j++) {
+                var q = platforms[j];
+                if (aabb(player.x, player.y, player.w, player.h, q.x, q.y, q.w, q.h)) {
+                    if (player.vy > 0) { player.y = q.y - player.h; player.onGround = true; }
+                    else if (player.vy < 0) { player.y = q.y + q.h; }
+                    player.vy = 0;
+                }
+            }
+
+            // coyote time update
+            if (player.onGround) coyoteFrames = COYOTE_MAX; else if (coyoteFrames > 0) coyoteFrames--;
+
+            // coins
+            for (var c = 0; c < coins.length; c++) {
+                var coin = coins[c];
+                if (!coin.taken && aabb(player.x, player.y, player.w, player.h, coin.x-10, coin.y-10, 20, 20)) {
+                    coin.taken = true;
+                    score += 10;
+                    scoreEl.textContent = 'Scor: ' + score;
+                }
+            }
+
+            // camera follows player
+            var centerX = cameraX + W * 0.4;
+            cameraX += (player.x - centerX) * 0.08;
+            if (cameraX < 0) cameraX = 0;
+        }
+
+        function clear() {
+            // background based on theme veil
+            ctx.clearRect(0,0,W,H);
+            ctx.fillStyle = 'rgba(0,0,0,0.6)';
+            ctx.fillRect(0,0,W,H);
+        }
+
+        function loop() {
+            update();
+            clear();
+            drawParallax();
+            drawPlatforms();
+            drawCoins();
+            drawPlayer();
+            requestAnimationFrame(loop);
+        }
+
+        function onKey(e, down) {
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = down;
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = down;
+            if ((e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') && down) {
+                if (player.onGround || coyoteFrames > 0) {
+                    player.vy = jumpVelocity;
+                    player.onGround = false;
+                    coyoteFrames = 0;
+                }
+            }
+        }
+        window.addEventListener('keydown', function(e){ onKey(e, true); });
+        window.addEventListener('keyup', function(e){ onKey(e, false); });
+
+        // start
+        player.y = 200;
+        loop();
+    })();
+    </script>
+</body>
+</html>
+

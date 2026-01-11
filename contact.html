@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teo'School - Contact</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo">
+                    <h2>Teo'School</h2>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Acasă</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Jocuri Video</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="joc-video.html">Ce este un joc video?</a></li>
+                            <li><a href="limbaje-programare.html">Limbaje de Programare</a></li>
+                            <li><a href="motoare-jocuri.html">Motoare de Jocuri</a></li>
+                            <li><a href="dezvoltare-jocuri.html">Dezvoltarea Jocurilor</a></li>
+                            <li><a href="industria-gaming.html">Industria Gaming</a></li>
+                            <li><a href="glosar.html">Glosar de termeni</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../index.html#despre-creator">Despre</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                    <li><a href="surse.html">Surse</a></li>
+                </ul>
+                <div class="settings">
+                    <button class="settings-btn" aria-haspopup="true" aria-expanded="false" aria-controls="settings-menu" title="Setări">⚙️</button>
+                    <div id="settings-menu" class="settings-menu" role="menu" aria-label="Setări temă">
+                        <button class="settings-item" data-theme="light" role="menuitem">Mod Luminos</button>
+                        <button class="settings-item" data-theme="dark" role="menuitem">Mod Întunecat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <div class="container">
+            <h1 class="page-title">Contact</h1>
+            
+            <section class="contact-section">
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="contact-content">
+                            <div class="contact-info">
+                                <h2>Hai să Discutăm!</h2>
+                                <p>Ai întrebări despre dezvoltarea jocurilor video sau dorești să afli mai multe despre conținutul site-ului? Nu ezita să mă contactezi!</p>
+                                
+                                <div class="contact-details">
+                                    <div class="contact-item">
+                                        <i class="fas fa-envelope"></i>
+                                        <span>Email: contact@teoschool.ro</span>
+                                    </div>
+                                    <div class="contact-item">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Locație: București, România</span>
+                                    </div>
+                                </div>
+
+                                <div class="social-links">
+                                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="contact-form">
+                                <h3>Trimite-mi un Mesaj</h3>
+                                <form id="contactForm">
+                                    <div class="form-group">
+                                        <label for="name">Nume</label>
+                                        <input type="text" id="name" name="name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" name="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="subject">Subiect</label>
+                                        <input type="text" id="subject" name="subject" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message">Mesaj</label>
+                                        <textarea id="message" name="message" rows="5" required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn">Trimite Mesajul</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Teo'School</h3>
+                    <p>Explorăm lumea fascinantă a jocurilor video și a dezvoltării acestora.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Linkuri Rapide</h3>
+                    <ul>
+                        <li><a href="../index.html">Acasă</a></li>
+                        <li><a href="joc-video.html">Jocuri Video</a></li>
+                        <li><a href="../index.html#despre-creator">Despre</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Teo'School. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        (function() {
+            var root = document.documentElement;
+            var savedTheme = localStorage.getItem('theme');
+            if (!savedTheme) {
+                try {
+                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    savedTheme = prefersDark ? 'dark' : 'light';
+                } catch (e) { savedTheme = 'dark'; }
+            }
+            root.setAttribute('data-theme', savedTheme);
+
+            var btn = document.querySelector('.settings-btn');
+            var menu = document.getElementById('settings-menu');
+            if (btn && menu) {
+                var toggleMenu = function(open) {
+                    if (typeof open === 'boolean') {
+                        menu.classList.toggle('open', open);
+                        btn.setAttribute('aria-expanded', String(open));
+                    } else {
+                        var willOpen = !menu.classList.contains('open');
+                        menu.classList.toggle('open', willOpen);
+                        btn.setAttribute('aria-expanded', String(willOpen));
+                    }
+                };
+                btn.addEventListener('click', function(e) { e.stopPropagation(); toggleMenu(); });
+                menu.addEventListener('click', function(e) {
+                    var target = e.target;
+                    if (target && target.matches('.settings-item')) {
+                        var theme = target.getAttribute('data-theme');
+                        if (theme) { root.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); }
+                        toggleMenu(false);
+                    }
+                });
+                document.addEventListener('click', function() { toggleMenu(false); });
+                document.addEventListener('keydown', function(e) { if (e.key === 'Escape') toggleMenu(false); });
+            }
+        })();
+    </script>
+</body>
+</html> 

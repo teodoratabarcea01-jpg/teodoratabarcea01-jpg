@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Jocuri Video - Teo'School</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo">
+                    <h2>Teo'School</h2>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Acasă</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Jocuri Video</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="joc-video.html">Ce este un joc video?</a></li>
+                            <li><a href="limbaje-programare.html">Limbaje de Programare</a></li>
+                            <li><a href="motoare-jocuri.html">Motoare de Jocuri</a></li>
+                            <li><a href="dezvoltare-jocuri.html">Dezvoltarea Jocurilor</a></li>
+                            <li><a href="industria-gaming.html">Industria Gaming</a></li>
+                            <li><a href="glosar.html">Glosar de termeni</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../index.html#despre-creator">Despre</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="settings">
+                    <button class="settings-btn" aria-haspopup="true" aria-expanded="false" aria-controls="settings-menu" title="Setări">⚙️</button>
+                    <div id="settings-menu" class="settings-menu" role="menu" aria-label="Setări temă">
+                        <button class="settings-item" data-theme="light" role="menuitem">Mod Luminos</button>
+                        <button class="settings-item" data-theme="dark" role="menuitem">Mod Întunecat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Testează-ți Cunostințele</h1>
+            <p>Răspunde la întrebări despre jocuri video, programare și dezvoltare pentru a-ți verifica cunoștințele!</p>
+        </div>
+    </section>
+
+    <section class="quiz-section">
+        <div class="container">
+            <div class="quiz-container">
+                <div id="quiz-start" class="quiz-card">
+                    <h2>Bine ai venit la Quiz!</h2>
+                    <p>Acest quiz conține întrebări despre:</p>
+                    <ul>
+                        <li>Istoria jocurilor video</li>
+                        <li>Limbaje de programare în dezvoltarea jocurilor</li>
+                        <li>Motoare de jocuri populare</li>
+                        <li>Procesul de dezvoltare a jocurilor</li>
+                    </ul>
+                    <button id="start-quiz" class="btn">Să Începem Quiz-ul →</button>
+                </div>
+
+                <div id="quiz-questions" class="quiz-card hidden">
+                    <div id="question-container">
+                        <h2 id="question-text"></h2>
+                        <div id="answers-container"></div>
+                    </div>
+                    <div class="quiz-progress">
+                        <span id="current-question">1</span> din <span id="total-questions">10</span>
+                    </div>
+                </div>
+
+                <div id="quiz-results" class="quiz-card hidden">
+                    <h2>Rezultatele Tale</h2>
+                    <div class="score-container">
+                        <p>Ai obținut <span id="score">0</span> din <span id="total">10</span> puncte!</p>
+                        <div class="score-message" id="score-message"></div>
+                    </div>
+                    <div class="results-details">
+                        <h3>Răspunsurile Corecte:</h3>
+                        <div id="answers-review"></div>
+                    </div>
+                    <button id="restart-quiz" class="btn">Încearcă Din Nou</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Teo'School. Toate drepturile rezervate.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var root = document.documentElement;
+            var savedTheme = localStorage.getItem('theme');
+            if (!savedTheme) {
+                try {
+                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    savedTheme = prefersDark ? 'dark' : 'light';
+                } catch (e) { savedTheme = 'dark'; }
+            }
+            root.setAttribute('data-theme', savedTheme);
+
+            var btn = document.querySelector('.settings-btn');
+            var menu = document.getElementById('settings-menu');
+            if (btn && menu) {
+                var toggleMenu = function(open) {
+                    if (typeof open === 'boolean') {
+                        menu.classList.toggle('open', open);
+                        btn.setAttribute('aria-expanded', String(open));
+                    } else {
+                        var willOpen = !menu.classList.contains('open');
+                        menu.classList.toggle('open', willOpen);
+                        btn.setAttribute('aria-expanded', String(willOpen));
+                    }
+                };
+                btn.addEventListener('click', function(e) { e.stopPropagation(); toggleMenu(); });
+                menu.addEventListener('click', function(e) {
+                    var target = e.target;
+                    if (target && target.matches('.settings-item')) {
+                        var theme = target.getAttribute('data-theme');
+                        if (theme) { root.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); }
+                        toggleMenu(false);
+                    }
+                });
+                document.addEventListener('click', function() { toggleMenu(false); });
+                document.addEventListener('keydown', function(e) { if (e.key === 'Escape') toggleMenu(false); });
+            }
+        })();
+    </script>
+
+    <script>
+        const quizData = [
+            {
+                question: "Care a fost primul joc video comercial din istorie?",
+                answers: [
+                    { text: "Pong", correct: false },
+                    { text: "Space Invaders", correct: false },
+                    { text: "Computer Space", correct: true },
+                    { text: "Pac-Man", correct: false }
+                ]
+            },
+            {
+                question: "Care limbaj de programare este cel mai folosit în dezvoltarea jocurilor cu Unity?",
+                answers: [
+                    { text: "C#", correct: true },
+                    { text: "C++", correct: false },
+                    { text: "Java", correct: false },
+                    { text: "Python", correct: false }
+                ]
+            },
+            {
+                question: "Care motor de joc este cunoscut pentru grafica sa de înaltă calitate?",
+                answers: [
+                    { text: "Unity", correct: false },
+                    { text: "Unreal Engine", correct: true },
+                    { text: "Godot", correct: false },
+                    { text: "GameMaker", correct: false }
+                ]
+            },
+            {
+                question: "În ce an a fost lansat primul PlayStation?",
+                answers: [
+                    { text: "1992", correct: false },
+                    { text: "1994", correct: true },
+                    { text: "1996", correct: false },
+                    { text: "1998", correct: false }
+                ]
+            },
+            {
+                question: "Care este primul pas în procesul de dezvoltare a unui joc?",
+                answers: [
+                    { text: "Programare", correct: false },
+                    { text: "Design", correct: false },
+                    { text: "Conceptualizare", correct: true },
+                    { text: "Testare", correct: false }
+                ]
+            },
+            {
+                question: "Ce limbaj de programare este folosit în dezvoltarea jocurilor pentru PlayStation?",
+                answers: [
+                    { text: "C++", correct: true },
+                    { text: "C#", correct: false },
+                    { text: "Java", correct: false },
+                    { text: "Python", correct: false }
+                ]
+            },
+            {
+                question: "Care motor de joc este open-source și gratuit?",
+                answers: [
+                    { text: "Unity", correct: false },
+                    { text: "Unreal Engine", correct: false },
+                    { text: "Godot", correct: true },
+                    { text: "CryEngine", correct: false }
+                ]
+            },
+            {
+                question: "Ce rol are un Game Designer în dezvoltarea unui joc?",
+                answers: [
+                    { text: "Programează jocul", correct: false },
+                    { text: "Creează grafica", correct: false },
+                    { text: "Definește regulile și mecanica jocului", correct: true },
+                    { text: "Testează jocul", correct: false }
+                ]
+            },
+            {
+                question: "Care a fost primul joc video care a introdus conceptul de 'save game'?",
+                answers: [
+                    { text: "The Legend of Zelda", correct: true },
+                    { text: "Super Mario Bros", correct: false },
+                    { text: "Final Fantasy", correct: false },
+                    { text: "Metroid", correct: false }
+                ]
+            },
+            {
+                question: "Ce tehnologie este folosită pentru a crea efecte vizuale în jocurile moderne?",
+                answers: [
+                    { text: "Ray Tracing", correct: true },
+                    { text: "Pixel Art", correct: false },
+                    { text: "Vector Graphics", correct: false },
+                    { text: "ASCII Art", correct: false }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        const startButton = document.getElementById('start-quiz');
+        const quizStart = document.getElementById('quiz-start');
+        const quizQuestions = document.getElementById('quiz-questions');
+        const quizResults = document.getElementById('quiz-results');
+        const questionText = document.getElementById('question-text');
+        const answersContainer = document.getElementById('answers-container');
+        const currentQuestionSpan = document.getElementById('current-question');
+        const totalQuestionsSpan = document.getElementById('total-questions');
+        const scoreSpan = document.getElementById('score');
+        const totalSpan = document.getElementById('total');
+        const scoreMessage = document.getElementById('score-message');
+        const answersReview = document.getElementById('answers-review');
+        const restartButton = document.getElementById('restart-quiz');
+
+        totalQuestionsSpan.textContent = quizData.length;
+        totalSpan.textContent = quizData.length;
+
+        startButton.addEventListener('click', startQuiz);
+        restartButton.addEventListener('click', restartQuiz);
+
+        function startQuiz() {
+            quizStart.style.display = 'none';
+            quizQuestions.style.display = 'block';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = quizData[currentQuestion];
+            questionText.textContent = question.question;
+            answersContainer.innerHTML = '';
+            currentQuestionSpan.textContent = currentQuestion + 1;
+
+            question.answers.forEach((answer, index) => {
+                const button = document.createElement('button');
+                button.className = 'answer-btn';
+                button.textContent = answer.text;
+                button.addEventListener('click', () => selectAnswer(answer.correct));
+                answersContainer.appendChild(button);
+            });
+        }
+
+        function selectAnswer(correct) {
+            if (correct) score++;
+
+            const buttons = answersContainer.getElementsByClassName('answer-btn');
+            Array.from(buttons).forEach(button => {
+                button.disabled = true;
+                if (button.textContent === quizData[currentQuestion].answers.find(a => a.correct).text) {
+                    button.classList.add('correct');
+                }
+            });
+
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < quizData.length) {
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function showResults() {
+            quizQuestions.style.display = 'none';
+            quizResults.style.display = 'block';
+            scoreSpan.textContent = score;
+
+            let message = '';
+            const percentage = (score / quizData.length) * 100;
+            if (percentage >= 90) {
+                message = 'Excelent! Ești un expert în jocuri video!';
+            } else if (percentage >= 70) {
+                message = 'Foarte bine! Ai cunoștințe solide!';
+            } else if (percentage >= 50) {
+                message = 'Bun! Mai ai de învățat, dar ești pe drumul cel bun!';
+            } else {
+                message = 'Nu te descuraja! Continuă să înveți și să explorezi lumea jocurilor video!';
+            }
+            scoreMessage.textContent = message;
+
+            // Afișează răspunsurile corecte
+            quizData.forEach((q, index) => {
+                const correctAnswer = q.answers.find(a => a.correct);
+                const div = document.createElement('div');
+                div.className = 'answer-review';
+                div.innerHTML = `
+                    <p><strong>Întrebarea ${index + 1}:</strong> ${q.question}</p>
+                    <p><strong>Răspunsul corect:</strong> ${correctAnswer.text}</p>
+                `;
+                answersReview.appendChild(div);
+            });
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answersReview.innerHTML = '';
+            quizResults.style.display = 'none';
+            quizStart.style.display = 'block';
+        }
+    </script>
+    <button id="backToTop" class="back-to-top" aria-label="Înapoi sus" title="Înapoi sus">↑</button>
+    <script>
+      (function(){
+        var btn = document.getElementById('backToTop');
+        var showAfter = 300;
+        function onScroll(){
+          if (window.scrollY > showAfter) btn.classList.add('show'); else btn.classList.remove('show');
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        onScroll();
+      })();
+    </script>
+</body>
+</html> 

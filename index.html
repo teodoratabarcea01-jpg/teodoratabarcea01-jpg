@@ -12,10 +12,10 @@
         <div class="container">
             <div class="nav-wrapper">
                 <a href="index.html" class="logo">
-                    <h2>Teo'School</h2>
+                    <h2>Teo'chool</h2>
                 </a>
                 <ul class="nav-links">
-                    <li><a href="index.html" class="active">Acasă</a></li>
+                    <li><a href="index.html" class="active">Acasa</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle">Jocuri Video</a>
                         <ul class="dropdown-menu">
@@ -24,12 +24,23 @@
                             <li><a href="pages/motoare-jocuri.html">Motoare de Jocuri</a></li>
                             <li><a href="pages/dezvoltare-jocuri.html">Dezvoltarea Jocurilor</a></li>
                             <li><a href="pages/industria-gaming.html">Industria Gaming</a></li>
+                            <li><a href="pages/glosar.html">Glosar de termeni</a></li>
+                            <li><a href="pages/joc-avansat.html">Mini joc (avansat)</a></li>
                         </ul>
                     </li>
                     <li><a href="#despre-creator">Despre</a></li>
                     <li><a href="pages/contact.html">Contact</a></li>
                     <li><a href="pages/surse.html">Surse</a></li>
                 </ul>
+                <div class="settings">
+                    <button class="settings-btn" aria-haspopup="true" aria-expanded="false" aria-controls="settings-menu" title="Setări">
+                        ⚙️
+                    </button>
+                    <div id="settings-menu" class="settings-menu" role="menu" aria-label="Setări temă">
+                        <button class="settings-item" data-theme="light" role="menuitem">Mod Luminos</button>
+                        <button class="settings-item" data-theme="dark" role="menuitem">Mod Întunecat</button>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -48,7 +59,7 @@
     <div class="content">
         <section id="topics" class="featured-topics">
             <h2>Subiecte Principale</h2>
-            <div class="topics-grid">
+            <div class="topics-grid reveal" data-anim="zoom-in">
                 <div class="topic-card">
                     <div class="topic-content">
                         <h3>Ce este un Joc Video?</h3>
@@ -57,7 +68,7 @@
                     </div>
                 </div>
 
-                <div class="topic-card">
+                <div class="topic-card reveal">
                     <div class="topic-content">
                         <h3>Limbaje de Programare</h3>
                         <p>Explorează limbajele de programare folosite în dezvoltarea jocurilor, de la C++ și C# până la limbaje specializate.</p>
@@ -65,7 +76,7 @@
                     </div>
                 </div>
 
-                <div class="topic-card">
+                <div class="topic-card reveal" data-anim="fade-right">
                     <div class="topic-content">
                         <h3>Motoare de Jocuri</h3>
                         <p>Învață despre motoarele de jocuri moderne, cum funcționează și cum sunt folosite în dezvoltarea jocurilor.</p>
@@ -73,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="topic-card">
+                <div class="topic-card reveal">
                     <div class="topic-content">
                         <h3>Dezvoltarea Jocurilor</h3>
                         <p>Descoperă procesul de dezvoltare a unui joc, de la concept până la lansare și suport post-lansare.</p>
@@ -267,7 +278,7 @@
                     <li><a href="index.html">Acasă</a></li>
                     <li><a href="#topics">Subiecte</a></li>
                     <li><a href="#timeline">Evoluție</a></li>
-                    <li><a href="#quiz">Quiz</a></li>
+                    <li><a href="pages/quiz.html">Quiz</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -291,6 +302,86 @@
             <p>&copy; 2025 Teo'School. Toate drepturile rezervate.</p>
         </div>
     </footer>
-</div>
+  </div>
+<script>
+    (function() {
+        var root = document.documentElement;
+        var savedTheme = localStorage.getItem('theme');
+        if (!savedTheme) {
+            try {
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                savedTheme = prefersDark ? 'dark' : 'light';
+            } catch (e) {
+                savedTheme = 'dark';
+            }
+        }
+        root.setAttribute('data-theme', savedTheme);
+
+        var btn = document.querySelector('.settings-btn');
+        var menu = document.getElementById('settings-menu');
+        if (btn && menu) {
+            var toggleMenu = function(open) {
+                if (typeof open === 'boolean') {
+                    menu.classList.toggle('open', open);
+                    btn.setAttribute('aria-expanded', String(open));
+                } else {
+                    var willOpen = !menu.classList.contains('open');
+                    menu.classList.toggle('open', willOpen);
+                    btn.setAttribute('aria-expanded', String(willOpen));
+                }
+            };
+
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toggleMenu();
+            });
+
+            menu.addEventListener('click', function(e) {
+                var target = e.target;
+                if (target && target.matches('.settings-item')) {
+                    var theme = target.getAttribute('data-theme');
+                    if (theme) {
+                        root.setAttribute('data-theme', theme);
+                        localStorage.setItem('theme', theme);
+                    }
+                    toggleMenu(false);
+                }
+            });
+
+            document.addEventListener('click', function() { toggleMenu(false); });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') toggleMenu(false);
+            });
+        }
+    })();
+</script>
+<button id="backToTop" class="back-to-top" aria-label="Înapoi sus" title="Înapoi sus">↑</button>
+<script>
+  (function(){
+    var btn = document.getElementById('backToTop');
+    var showAfter = 300;
+    function onScroll(){
+      if (window.scrollY > showAfter) btn.classList.add('show'); else btn.classList.remove('show');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    onScroll();
+  })();
+</script>
+<script>
+  (function(){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+  })();
+</script>
 </body>
 </html>
+
+

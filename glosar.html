@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glosar de termeni gaming – Teo'School</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo">
+                    <h2>Teo'School</h2>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Acasă</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle active">Jocuri Video</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="joc-video.html">Ce este un joc video?</a></li>
+                            <li><a href="limbaje-programare.html">Limbaje de Programare</a></li>
+                            <li><a href="motoare-jocuri.html">Motoare de Jocuri</a></li>
+                            <li><a href="dezvoltare-jocuri.html">Dezvoltarea Jocurilor</a></li>
+                            <li><a href="industria-gaming.html">Industria Gaming</a></li>
+                            <li><a href="glosar.html" class="active">Glosar de termeni</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="../index.html#despre-creator">Despre</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="surse.html">Surse</a></li>
+                </ul>
+                <div class="settings">
+                    <button class="settings-btn" aria-haspopup="true" aria-expanded="false" aria-controls="settings-menu" title="Setări">⚙️</button>
+                    <div id="settings-menu" class="settings-menu" role="menu" aria-label="Setări temă">
+                        <button class="settings-item" data-theme="light" role="menuitem">Mod Luminos</button>
+                        <button class="settings-item" data-theme="dark" role="menuitem">Mod Întunecat</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-page">
+        <div class="container">
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1>Glosar de termeni gaming</h1>
+                    <p class="hero-description">Un mic dicționar cu cei mai întâlniți termeni din gaming. Plasează cursorul peste fiecare termen pentru o mică animație și evidențiere.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <div class="content-card">
+                    <h2>Termeni de bază</h2>
+                    <div class="glossary-grid">
+                        <div class="glossary-item">
+                            <div class="term">FPS</div>
+                            <div class="definition">First-Person Shooter – jocuri în care acțiunea este văzută prin ochii personajului, accent pe împușcături.</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="term">RPG</div>
+                            <div class="definition">Role-Playing Game – joci rolul unui personaj, evoluezi prin misiuni, skill-uri și poveste.</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="term">MMO</div>
+                            <div class="definition">Massively Multiplayer Online – jocuri online cu un număr mare de jucători pe același server.</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="term">MOBA</div>
+                            <div class="definition">Multiplayer Online Battle Arena – două echipe se luptă pe o hartă simetrică pentru obiective strategice.</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="term">RTS</div>
+                            <div class="definition">Real-Time Strategy – strategie în timp real, gestionare de resurse, baze și armate.</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="term">Sandbox</div>
+                            <div class="definition">Jocuri cu lume deschisă și libertate mare de explorare și creare (ex: Minecraft).</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="term">Roguelike</div>
+                            <div class="definition">Niveluri generate procedural, dificultate ridicată, progres pierdut la moarte (permadeath).</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="term">Hitbox</div>
+                            <div class="definition">Zona invizibilă a unui obiect folosită pentru coliziuni și lovituri.</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="term">Cooldown</div>
+                            <div class="definition">Timp de așteptare până când o abilitate poate fi folosită din nou.</div>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="term">XP</div>
+                            <div class="definition">Experiență – puncte acumulate pentru a progresa sau a crește nivelul.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Teo'School</h3>
+                    <p>Învățăm despre jocurile video și programare într-un mod distractiv și interactiv.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Link-uri Rapide</h3>
+                    <ul>
+                        <li><a href="../index.html">Acasă</a></li>
+                        <li><a href="joc-video.html">Jocuri Video</a></li>
+                        <li><a href="glosar.html" class="active">Glosar</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Teo'School. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var root = document.documentElement;
+            var savedTheme = localStorage.getItem('theme');
+            if (!savedTheme) {
+                try {
+                    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    savedTheme = prefersDark ? 'dark' : 'light';
+                } catch (e) { savedTheme = 'dark'; }
+            }
+            root.setAttribute('data-theme', savedTheme);
+
+            var btn = document.querySelector('.settings-btn');
+            var menu = document.getElementById('settings-menu');
+            if (btn && menu) {
+                var toggleMenu = function(open) {
+                    if (typeof open === 'boolean') {
+                        menu.classList.toggle('open', open);
+                        btn.setAttribute('aria-expanded', String(open));
+                    } else {
+                        var willOpen = !menu.classList.contains('open');
+                        menu.classList.toggle('open', willOpen);
+                        btn.setAttribute('aria-expanded', String(willOpen));
+                    }
+                };
+                btn.addEventListener('click', function(e) { e.stopPropagation(); toggleMenu(); });
+                menu.addEventListener('click', function(e) {
+                    var target = e.target;
+                    if (target && target.matches('.settings-item')) {
+                        var theme = target.getAttribute('data-theme');
+                        if (theme) { root.setAttribute('data-theme', theme); localStorage.setItem('theme', theme); }
+                        toggleMenu(false);
+                    }
+                });
+                document.addEventListener('click', function() { toggleMenu(false); });
+                document.addEventListener('keydown', function(e) { if (e.key === 'Escape') toggleMenu(false); });
+            }
+        })();
+    </script>
+    <button id="backToTop" class="back-to-top" aria-label="Înapoi sus" title="Înapoi sus">↑</button>
+    <script>
+      (function(){
+        var btn = document.getElementById('backToTop');
+        var showAfter = 300;
+        function onScroll(){
+          if (window.scrollY > showAfter) btn.classList.add('show'); else btn.classList.remove('show');
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        btn.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        onScroll();
+      })();
+    </script>
+</body>
+</html>
+
